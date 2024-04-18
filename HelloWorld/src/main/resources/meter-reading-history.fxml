@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="300" prefWidth="400" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mixail.Controllers.MeterReadingHistoryController">
+
+    <Label text="Выберите прибор учета:" />
+    <ComboBox fx:id="meterComboBox" promptText="Выберите прибор учета" />
+
+    <TableView fx:id="historyTable" prefHeight="200" prefWidth="300">
+        <columns>
+            <TableColumn prefWidth="150" text="Дата и время">
+                <cellValueFactory><PropertyValueFactory property="" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="150" text="Показание">
+                <cellValueFactory><PropertyValueFactory property="" /></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</VBox>

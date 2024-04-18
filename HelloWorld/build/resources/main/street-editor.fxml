@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="300" prefWidth="400" spacing="20" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mixail.Controllers.StreetEditorController">
+
+    <TextField fx:id="streetNameField" prefHeight="52.0" prefWidth="400.0" promptText="Название улицы" />
+
+    <HBox spacing="10">
+        <Button onAction="#addStreet" text="Добавить" />
+        <Button onAction="#editStreet" text="Редактировать" />
+      <Button fx:id="delete" layoutX="89.0" layoutY="10.0" onAction="#deleteStreet" text="Удалить" />
+    </HBox>
+
+    <TableView fx:id="streetsTable" prefHeight="200" prefWidth="300">
+        <columns>
+            <TableColumn prefWidth="200" text="Улица">
+                <cellValueFactory><PropertyValueFactory property="" /></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</VBox>
