@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300" prefWidth="400" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mixail.Controllers.MeterEditorController">
+   <children>
+
+       <Label text="Выберите адрес:" />
+       <ComboBox fx:id="addressComboBox" layoutY="17.600000381469727" promptText="Выберите адрес" />
+
+       <Label layoutY="43.20000076293945" text="Выберите тип прибора учета:" />
+       <ComboBox fx:id="meterTypeComboBox" layoutY="60.79999923706055" promptText="Выберите тип прибора учета" />
+
+       <TextField fx:id="serialNumberField" layoutY="86.4000015258789" promptText="Серийный номер" />
+
+       <Button layoutY="112.0" onAction="#addMeter" text="Добавить прибор учета" />
+   </children>
+</AnchorPane>
