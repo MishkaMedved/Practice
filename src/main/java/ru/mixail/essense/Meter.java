@@ -14,6 +14,12 @@ public class Meter {
         this.previousReading = previousReading;
     }
 
+
+    public Meter(MeterType meterType, int serialNumber) {
+        this.meterType = meterType;
+        this.serialNumber = serialNumber;
+    }
+
     public MeterType getMeterType() {
         return meterType;
     }
@@ -45,4 +51,14 @@ public class Meter {
     public void setPreviousReading(int previousReading) {
         this.previousReading = previousReading;
     }
+    @Override
+    public String toString() {
+        return "Meter{" +
+                "meterType=" + meterType +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", currentReading=" + currentReading +
+                ", previousReading=" + previousReading +
+                '}';
+    }
+
 }
