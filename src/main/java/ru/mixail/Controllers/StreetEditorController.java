@@ -14,13 +14,6 @@ import java.sql.SQLException;
 
 public class StreetEditorController {
 
-
-    @FXML
-    private Button add;
-
-    @FXML
-    private Button delete;
-
     @FXML
     private TextField streetNameField;
 
@@ -30,13 +23,20 @@ public class StreetEditorController {
     @FXML
     private TableColumn<Street, String> streetNameColumn;
 
+    @FXML
+    private void initialize() {
+        streetNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        loadStreets();
+    }
 
     @FXML
     private void addStreet() {
         String streetName = streetNameField.getText();
         if (!streetName.isEmpty()) {
-            Street street = new Street(streetName);
-            insertStreet(street);
+            Street newStreet = new Street(streetName);
+            insertStreet(newStreet); // Сохранение новой улицы в базе данных
+            streetsTable.getItems().add(newStreet); // Добавление новой улицы в таблицу
+            streetNameField.clear();
         }
     }
 
@@ -50,14 +50,79 @@ public class StreetEditorController {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    public void editStreet() {
-        // Метод для редактирования улицы
+    private void loadStreets() {
+        String sql = "SELECT * FROM Street";
+        try (Connection connection = ConnectBD.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                streetsTable.getItems().add(new Street(name));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
+    public void editStreet() {
+        // Получаем выбранную улицу из таблицы
+        Street selectedStreet = streetsTable.getSelectionModel().getSelectedItem();
+        if (selectedStreet != null) {
+            // Устанавливаем имя выбранной улицы в TextField
+            streetNameField.setText(selectedStreet.getName());
+
+            // Добавляем обработчик события для TextField
+            streetNameField.setOnAction(event -> {
+                String newName = streetNameField.getText();
+                if (!newName.isEmpty()) {
+                    selectedStreet.setName(newName);
+                    // Обновляем запись в таблице
+                    streetsTable.refresh();
+                    // Обновляем улицу в базе данных
+                    updateStreetInDatabase(selectedStreet);
+
+                    // Очищаем TextField
+                    streetNameField.clear();
+                }
+            });
+        }
+    }
+
+
+    private void updateStreetInDatabase(Street street) {
+        String sql = "UPDATE Street SET name = ? WHERE name = ?";
+        try (Connection connection = ConnectBD.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, street.getName());
+            statement.setString(2, street.getName());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
     public void deleteStreet() {
-        // Метод для удаления улицы
+        // Получаем выбранную улицу из таблицы
+        Street selectedStreet = streetsTable.getSelectionModel().getSelectedItem();
+        if (selectedStreet != null) {
+            // Удаляем улицу из таблицы
+            streetsTable.getItems().remove(selectedStreet);
+            // Удаляем улицу из базы данных
+            deleteStreetFromDatabase(selectedStreet);
+        }
+    }
+
+    private void deleteStreetFromDatabase(Street street) {
+        String sql = "DELETE FROM Street WHERE name = ?";
+        try (Connection connection = ConnectBD.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, street.getName());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -25,7 +25,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#redactMeterType" prefHeight="100.0" prefWidth="210.0" text="Редактировать &quot;Тип прибора учета&quot;" textAlignment="CENTER" wrapText="true">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#reading" prefHeight="100.0" prefWidth="210.0" text="Добавление прибора учета к адрессу" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="VK Sans Display Medium" size="12.0" />
                      </font>
@@ -36,7 +36,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#reading" prefHeight="100.0" prefWidth="210.0" text="Ввести показания прибора учета" textAlignment="CENTER" wrapText="true">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#redactMeterType" prefHeight="100.0" prefWidth="210.0" text="Редактировать &quot;Тип прибора учета&quot;" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="VK Sans Display Medium" size="12.0" />
                      </font>
